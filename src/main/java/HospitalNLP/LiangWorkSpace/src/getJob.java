@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 
 public class getJob {
-      
+                                                                                  
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		// TODO Auto-generated method stub
 		 final String URL = "jdbc:mysql://localhost/breathing?user=root&password=123456&useUnicode=true&characterEncoding=gbk";
