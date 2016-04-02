@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 
 public class getJob {
-
+      
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		// TODO Auto-generated method stub
 		 final String URL = "jdbc:mysql://localhost/breathing?user=root&password=123456&useUnicode=true&characterEncoding=gbk";
@@ -24,8 +24,8 @@ public class getJob {
 		 pstmt = conn.prepareStatement("select * from text ");
 		 pstmt1 = conn.prepareStatement("select * from split ");
 		// Statement statement = db.dbConn.createStatement();
-		rs = pstmt.executeQuery();//�����
-		rs1 = pstmt1.executeQuery();//�����
+		rs = pstmt.executeQuery();//锟斤拷锟斤拷锟�
+		rs1 = pstmt1.executeQuery();//锟斤拷锟斤拷锟�
 		mywordspliter s = new mywordspliter();
 		String[] words = new String[5];
 		ArrayList<String> split = new ArrayList<String>();
@@ -39,7 +39,7 @@ public class getJob {
 				String str = rs.getString("t0");
 				int id = rs.getInt("id");
 				s.split(str);
-				 words=s.insplit.split("\\��");
+				 words=s.insplit.split("\\锟斤拷");
 				 for(int i=0;i<words.length;i++){
 		 
 					for(int t=0;t<split.size();t++){
