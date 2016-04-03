@@ -1,6 +1,6 @@
 package HospitalNLP.TianWorkSpace;
 
-import HospitalNLP.TianWorkSpace.Unit.dbConn;
+import HospitalNLP.TianWorkSpace.Utils.dbConn;
 
 import java.io.*;
 import java.sql.ResultSet;

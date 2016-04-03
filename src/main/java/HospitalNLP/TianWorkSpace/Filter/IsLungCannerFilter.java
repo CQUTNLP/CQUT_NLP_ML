@@ -1,6 +1,6 @@
 package HospitalNLP.TianWorkSpace.Filter;
 
-import HospitalNLP.TianWorkSpace.Unit.MysqlJdbc;
+import HospitalNLP.TianWorkSpace.Utils.MysqlJdbc;
 import HospitalNLP.TianWorkSpace.model.Patient;
 
 import java.sql.ResultSet;
