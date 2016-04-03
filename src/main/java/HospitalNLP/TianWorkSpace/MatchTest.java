@@ -9,13 +9,31 @@ import java.util.regex.Pattern;
 public class MatchTest {
 
     public void ContainTest(){
-        String str="Hello World";  //å¾…åˆ¤æ–­çš„å­—ç¬¦ä¸²
+        String str="Hello World";  //å¾??¤æ????å­?ç¬?ä¸?
         String prexStr="ll";
-        String reg=".*ll.*";  //åˆ¤æ–­å­—ç¬¦ä¸²ä¸­æ˜¯å¦å«æœ‰ç‰¹å®šå­—ç¬¦ä¸²ll
+        String reg=".*ll.*";  //?¤æ??å­?ç¬?ä¸²ä¸­?????????¹å??å­?ç¬?ä¸?ll
         System.out.println(str.matches(reg));
         System.out.println(str.contains(prexStr));
     }
+    public void ttt(){
+        String Ps= ".*·Î.*°©.*";
+        String PPS= "ÇëÎÊ·ÎÔÚÄÄ¶ù";
+        Pattern p  =  Pattern.compile(Ps);
+        String s="1.×óÏÂ·ÎÁÛ°©£¨T4N2M0£¬¢óbÆÚ£©2¡¢¶à·¢Ç»Ï¶ĞÔÄÔ¹£Èû 3¡¢ÄÔÎ®Ëõ  ";
+        Matcher m = p.matcher(s);
+        System.out.println(s.replace("¡¢","."));
+//        if(m.find()){
+//        System.out.println(m.find());
 
+//        System.out.println(c);
+//        }
+//        String[] c=s.split("\\d\\.\\d?");
+//        System.out.println("11:"+PPS);
+//        for(String z:c){
+//            System.out.println(z);
+//        }
+
+    }
     public void Patterntest(){
 //        Pattern p1  =  Pattern.compile( "(.*)ll(.*)" );
         Pattern p2  =  Pattern.compile( "(.*)-(.*)-(.*)-(.*)" );
@@ -24,11 +42,11 @@ public class MatchTest {
         Matcher m  =  p2.matcher(s);
 //        while (m.find())
 //        {
-//            System.out.println( " m.group(): " + m.group());  // æ‰“å°æ‰€æœ‰
+//            System.out.println( " m.group(): " + m.group());  // ???°æ????
 //
-//            System.out.println( " m.group(1): " + m.group( 1 ));  // æ‰“å°æ•°å­—çš„
+//            System.out.println( " m.group(1): " + m.group( 1 ));  // ???°æ?°å????
 //
-//            System.out.println( " m.group(2): " + m.group( 2 ));  // æ‰“å°å­—æ¯çš„
+//            System.out.println( " m.group(2): " + m.group( 2 ));  // ???°å??æ¯???
 //            System.out.println();
 //
 //        }
@@ -41,6 +59,6 @@ public class MatchTest {
     }
     public static void main(String[] args) {
         MatchTest matchTest = new MatchTest();
-        matchTest.Patterntest();
+        matchTest.ttt();
     }
 }

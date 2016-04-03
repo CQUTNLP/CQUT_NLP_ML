@@ -24,8 +24,8 @@ public class getJob {
 		 pstmt = conn.prepareStatement("select * from text ");
 		 pstmt1 = conn.prepareStatement("select * from split ");
 		// Statement statement = db.dbConn.createStatement();
-		rs = pstmt.executeQuery();//锟斤拷锟斤拷锟�
-		rs1 = pstmt1.executeQuery();//锟斤拷锟斤拷锟�
+		rs = pstmt.executeQuery();//�����?
+		rs1 = pstmt1.executeQuery();//�����?
 		mywordspliter s = new mywordspliter();
 		String[] words = new String[5];
 		ArrayList<String> split = new ArrayList<String>();
@@ -39,7 +39,7 @@ public class getJob {
 				String str = rs.getString("t0");
 				int id = rs.getInt("id");
 				s.split(str);
-				 words=s.insplit.split("\\锟斤拷");
+				 words=s.insplit.split("\\��");
 				 for(int i=0;i<words.length;i++){
 		 
 					for(int t=0;t<split.size();t++){
