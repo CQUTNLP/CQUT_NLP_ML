@@ -11,7 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.dbConn;
+import HospitalNLP.LiangWorkSpace.src.model.dbConn;
 
 
 public class test {
