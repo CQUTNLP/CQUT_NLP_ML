@@ -6,6 +6,15 @@ package HospitalNLP.TianWorkSpace.model;
 public class Patient {
     private int id;
     private String isLungCanner;
+    private String CannerDate;
+
+    public String getCannerDate() {
+        return CannerDate;
+    }
+
+    public void setCannerDate(String cannerDate) {
+        CannerDate = cannerDate;
+    }
 
     public void setId(int id) {
         this.id = id;

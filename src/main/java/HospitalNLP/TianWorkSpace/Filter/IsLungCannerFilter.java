@@ -42,7 +42,7 @@ public class IsLungCannerFilter {
         }
         return ppatients;
     }
-    private String IsTrue(String sentence){
+    public String IsTrue(String sentence){
         String result="flase";
         sentence=sentence.replaceAll("\\u3001","."); // \\u3001  «∂Ÿ∫≈
 //        System.out.println(sentence);
@@ -50,11 +50,18 @@ public class IsLungCannerFilter {
         String fisrt_sentences=sentence.split("\\d\\.\\d?")[1];
         String rule1Pattern=".*∑Œ.*∞©.*";
         String rule2Pattern= "£ø|//?";
+        String rule3Pattern= "¡Ÿ¥≤’Ô∂œ";
         Pattern p  =  Pattern.compile(rule1Pattern);
         Matcher m = p.matcher(fisrt_sentences);
         if (m.find()){
+            result="true";
 //            result=fisrt_sentences.contains("£ø")?"maybe":"true";
-            result=Pattern.compile(rule2Pattern).matcher(fisrt_sentences).find()?"maybe":"true";
+            if(Pattern.compile(rule2Pattern).matcher(fisrt_sentences).find()){
+                result="maybe";
+            }
+            if(Pattern.compile(rule3Pattern).matcher(fisrt_sentences).find()){
+                result="maybe";
+            }
         }
         return result;
     }
