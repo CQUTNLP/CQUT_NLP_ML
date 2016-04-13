@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * @param args
- * ¼ÌĞøÏòÇ°,Striver
+ * author,Striver
  */
 public class MyBPNetWork {
 	double []inputdata;
@@ -12,12 +12,12 @@ public class MyBPNetWork {
 	int expect;
 	int HiddenLayer;
 	int []NeuralNumber;
-	double speed=0.1;//×ÔÊÊÓ¦Ñ§Ï°ËÙÂÊ
+	double speed=0.1;//ï¿½ï¿½ï¿½ï¿½Ó¦Ñ§Ï°ï¿½ï¿½ï¿½ï¿½
 	double lasterror=0;
 	double error;
 	double output=0;
 	double [][]weight;
-	double [][]lastweight;//ÒıÈë¶¯Á¿Òò×Ó
+	double [][]lastweight;//ï¿½ï¿½ï¿½ë¶¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	double []y;
 	double []Threshold;
 	private double []nowgradient;
@@ -29,7 +29,7 @@ public class MyBPNetWork {
 	ArrayList<double []>allThreshold;
 	double range = (float) 2.4/2;
 	
-	public void Getinputdata(double []inputdata,int expect)//»ñÈ¡ÊäÈëÊı¾İ
+	public void Getinputdata(double []inputdata,int expect)//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	{
 		this.inputdata = inputdata;
 		this.x = inputdata.clone();
@@ -37,13 +37,13 @@ public class MyBPNetWork {
 	}
 	public void input()
 	{
-		System.out.println("Òşº¬²ãµÄ¸öÊı");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½");
 		Scanner s1 = new Scanner(System.in);
 		HiddenLayer = s1.nextInt();
 		NeuralNumber = new int[HiddenLayer];
 		for(int i=0;i<HiddenLayer;i++)
 		{
-			System.out.println("µÚ"+(i+1)+"²ãµÄÉñ¾­ÔªµÄ¸öÊı");
+			System.out.println("ï¿½ï¿½"+(i+1)+"ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½Ä¸ï¿½ï¿½ï¿½");
 			Scanner s2 = new Scanner(System.in);
 			NeuralNumber[i]=s2.nextInt();
 		}
@@ -54,11 +54,11 @@ public class MyBPNetWork {
 		weightcorrect = new ArrayList<double[][]>();
 		s1.close();
 	}
-	public void InitWeight()//³õÊ¼»¯È¨ÖØºÍãĞÖµ
+	public void InitWeight()//ï¿½ï¿½Ê¼ï¿½ï¿½È¨ï¿½Øºï¿½ï¿½ï¿½Öµ
 	{
 		for(int Layer=0;Layer<=HiddenLayer;Layer++)
 		{
-			if(Layer==0)//ÊäÈë²ãÁ¬½ÓµÄÒşº¬²ã
+			if(Layer==0)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			{
 				weight = new double[NeuralNumber[0]][inputdata.length];
 				lastweight = new double[NeuralNumber[0]][inputdata.length];
@@ -66,13 +66,13 @@ public class MyBPNetWork {
 				for(int i=0;i<NeuralNumber[0];i++)
 					for(int j=0;j<inputdata.length;j++)
 					{
-						weight[i][j]=(Math.random()*2*range-range);//³õÊ¼»¯È¨ÖØ
+						weight[i][j]=(Math.random()*2*range-range);//ï¿½ï¿½Ê¼ï¿½ï¿½È¨ï¿½ï¿½
 						lastweight[i][j]=0;
 					}
 				allweight.add(weight);
 				weightcorrect.add(lastweight);
 				for(int j=0;j<NeuralNumber[0];j++)
-					Threshold[j]=(Math.random()*2*range-range);//³õÊ¼»¯ãĞÖµ
+					Threshold[j]=(Math.random()*2*range-range);//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Öµ
 				allThreshold.add(Threshold);
 			}
 			else if(Layer==HiddenLayer)
@@ -81,16 +81,16 @@ public class MyBPNetWork {
 				lastweight = new double[1][NeuralNumber[HiddenLayer-1]];
 				for(int i=0;i<NeuralNumber[HiddenLayer-1];i++)
 				{
-					weight[0][i]=(Math.random()*2*range-range);//³õÊ¼»¯È¨ÖØ
+					weight[0][i]=(Math.random()*2*range-range);//ï¿½ï¿½Ê¼ï¿½ï¿½È¨ï¿½ï¿½
 					lastweight[0][i]=0;
 				}
 				allweight.add(weight);
 				weightcorrect.add(lastweight);
 				Threshold = new double[1];
-				Threshold[0]=(Math.random()*2*range-range);//³õÊ¼»¯ãĞÖµ
+				Threshold[0]=(Math.random()*2*range-range);//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Öµ
 				allThreshold.add(Threshold);
 			}
-			else//Òşº¬²ãÁ¬½ÓµÄÒşº¬²ã
+			else//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			{
 				weight = new double[NeuralNumber[Layer]][NeuralNumber[Layer-1]];
 				lastweight = new double[NeuralNumber[Layer]][NeuralNumber[Layer-1]];
@@ -98,19 +98,19 @@ public class MyBPNetWork {
 				for(int i=0;i<NeuralNumber[Layer];i++)
 					for(int j=0;j<NeuralNumber[Layer-1];j++)
 					{
-						weight[i][j]=(Math.random()*2*range-range);//³õÊ¼»¯È¨ÖØ
+						weight[i][j]=(Math.random()*2*range-range);//ï¿½ï¿½Ê¼ï¿½ï¿½È¨ï¿½ï¿½
 						lastweight[i][j]=0;
 					}
 				allweight.add(weight);
 				weightcorrect.add(lastweight);
 				for(int j=0;j<NeuralNumber[Layer];j++)
-					Threshold[j]=(Math.random()*2*range-range);//³õÊ¼»¯ãĞÖµ
+					Threshold[j]=(Math.random()*2*range-range);//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Öµ
 				allThreshold.add(Threshold);
 			}
 		}
 		newweight.addAll(allweight);
 	}
-	public void sigmoid()//¼¤»îº¯Êı
+	public void sigmoid()//ï¿½ï¿½ï¿½îº¯ï¿½ï¿½
 	{
 		for(int i=0;i<HiddenLayer;i++)
 		{
@@ -124,7 +124,7 @@ public class MyBPNetWork {
 			for(int j=0;j<NeuralNumber[i];j++)
 			{
 				double input=0;
-				for(int k=0;k<x.length;k++)//¼ÆËãÒşº¬²ãÊµ¼ÊÊä³ö
+				for(int k=0;k<x.length;k++)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½
 				{
 					input+=x[k]*allweight.get(i)[j][k];
 				}
@@ -145,7 +145,7 @@ public class MyBPNetWork {
 	{
 		weight = new double[1][NeuralNumber[HiddenLayer-1]];
 		lastweight = new double[1][NeuralNumber[HiddenLayer-1]];
-		nowgradient = new double[1];//Êä³ö²ãµÄÎó²îÌİ¶È
+		nowgradient = new double[1];//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ¶ï¿½
 		nowgradient[0] = output*(1-output)*error;
 		parentgradient=nowgradient.clone();
 		for(int i=0;i<NeuralNumber[HiddenLayer-1];i++)
@@ -154,12 +154,12 @@ public class MyBPNetWork {
 			weight[0][i]=allweight.get(HiddenLayer)[0][i]+lastweight[0][i]+weightcorrect.get(HiddenLayer)[0][i];
 		}
 		weightcorrect.set(HiddenLayer,lastweight);
-		newweight.set(HiddenLayer,weight);//Êä³ö²ãÁ¬½ÓÒşº¬²ãµÄÈ¨ÖØĞŞÕı
+		newweight.set(HiddenLayer,weight);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		Threshold[0]=allThreshold.get(HiddenLayer)[0]+speed*(-1)*nowgradient[0];
 		allThreshold.set(HiddenLayer, Threshold);
 		for(int i=HiddenLayer-1;i>=0;i--)
 		{
-			if(i==0)//Òşº¬²ãÁ¬½ÓÊäÈë²ã
+			if(i==0)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			{
 				weight = new double[NeuralNumber[0]][inputdata.length];
 				lastweight = new double[NeuralNumber[0]][inputdata.length];
@@ -183,7 +183,7 @@ public class MyBPNetWork {
 				weightcorrect.set(i, lastweight);
 				allThreshold.set(i, Threshold);
 			}
-			else//Òşº¬²ãÁ¬½ÓÒşº¬²ã
+			else//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			{
 				weight = new double[NeuralNumber[i]][NeuralNumber[i-1]];
 				lastweight = new double[NeuralNumber[i]][NeuralNumber[i-1]];
@@ -217,11 +217,11 @@ public class MyBPNetWork {
 	}
 	public void run()
 	{
-		sigmoid();//³õÊ¼»¯ÒÔ¼°¼¤»îº¯Êı
-		WeightTrain();//È¨ÖØÑµÁ·
-		update();//¸üĞÂÈ¨Öµ
-//		if(Math.pow(lasterror,2)<Math.pow(error,2))//Í¨¹ı±È½ÏÁ½´Î´ÎµÄÎó²îÆ½·½ºÍÀ´µ÷½ÚÑ§Ï°ËÙÂÊ
-//			speed=speed*1.05;//Èç¹ûÉÏÒ»´ÎµÄÎó²îÆ½·½ºÍ´óÓÚÕâÒ»´ÎµÄ£¬ÄÇËµÃ÷Îó²îÔ½À´Ô½´ó£¬ÔòÒªÔö¼ÓÑ§Ï°ËÙÂÊ£¬·ñÔò¼õĞ¡
+		sigmoid();//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½îº¯ï¿½ï¿½
+		WeightTrain();//È¨ï¿½ï¿½Ñµï¿½ï¿½
+		update();//ï¿½ï¿½ï¿½ï¿½È¨Öµ
+//		if(Math.pow(lasterror,2)<Math.pow(error,2))//Í¨ï¿½ï¿½È½ï¿½ï¿½ï¿½ï¿½Î´Îµï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ§Ï°ï¿½ï¿½ï¿½ï¿½
+//			speed=speed*1.05;//ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Îµï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½Í´ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ÎµÄ£ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Ñ§Ï°ï¿½ï¿½ï¿½Ê£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡
 //		else
 //			speed=speed*0.7;
 //		lasterror = error;
