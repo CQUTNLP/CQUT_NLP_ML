@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * @param args
- * author,Striver
+ * author Striver
  */
 public class MyBPNetWork {
 	double []inputdata;
