@@ -1,6 +1,6 @@
 package HospitalNLP.TianWorkSpace;
 
-import HospitalNLP.TianWorkSpace.Unit.dbConn;
+import HospitalNLP.TianWorkSpace.Utils.dbConn;
 
 import java.io.*;
 import java.sql.ResultSet;
@@ -33,58 +33,31 @@ public class ArticalTest {
             {
                 c=c+line;
             }
-//			c=c.replace("\"", "\'");;
             try {
                 statement1 = dbconn.dbConn.createStatement();
-                statement2 = dbconn.dbConn.createStatement();
                 ResultSet rs;
                 String sql1="select * from terms order by id";
                 rs = statement1.executeQuery(sql1);  //????????ж??????????
                 int pos=0;
                 while(rs.next()){
-//                    System.out.println("c-----------"+c);
-//                    System.out.println("term:"+rs.getString("term"));
                     String terms[]=c.split(rs.getString("term"));
-
-
-//                    for(String str:terms){
-//                        System.out.println("c.split:"+str);
-//                    }
-
-//					String sql2="insert into text values ('"+terms[pos]+"'+)";
-//                    System.out.println("----------------"+terms[0]);
                     content.add(terms[0]);
                     c=c.replace(terms[0],"");
                     c=c.replaceAll("\\'"+rs.getString("term")+"'", "");
-//					System.out.println(c);
                     pos++;
                 }
-
                 content.add(c);
-
-//                int i=1;
-//                for(String str:content){
-//
-//                    System.out.println(i+":"+str);
-//                    i++;
-//                }
                 pos=0;
                 String t="";
                 while(pos<content.size()){
-//                    System.out.println("+++++++++++++++"+content.get(pos));
                     t+="'"+content.get(pos)+"'";
                     t+=",";
                     pos++;
                 }
-//                System.out.println(t);
                 t=t.substring(0,t.length()-1);  // 去掉最后的逗号
                 String col="t0,t1,t2,t3,t4,t5,t6,t7";
-//                String tGbk=new String(t.getBytes("utf-8"),"gbk");
-//                System.out.println(tGbk);
                 sql1="insert into text ("+col+") values("+t+")";
-
                 System.out.println(sql1);
-//                statement1.executeUpdate(sql1);
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

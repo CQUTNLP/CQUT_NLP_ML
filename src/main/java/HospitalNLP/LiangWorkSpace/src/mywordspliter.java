@@ -1,6 +1,6 @@
 package HospitalNLP.LiangWorkSpace.src;
 
-import ICTCLAS.I3S.AC.ICTCLAS50;
+import HospitalNLP.LiangWorkSpace.src.ICTCLAS.I3S.AC.ICTCLAS50;
 
 //锟斤拷装锟街达拷锟斤拷
 public class mywordspliter {
