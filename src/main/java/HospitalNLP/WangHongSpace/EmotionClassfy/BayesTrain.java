@@ -1,9 +1,11 @@
 package EmotionClassfy;
+
+import HospitalNLP.WangHongSpace.EmotionClassfy.myspliter;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -12,7 +14,7 @@ import java.util.ArrayList;
  * 用贝叶斯算法做情感分类的训练
  */
 public class BayesTrain {
-	dbConnect dbconnect;//连接数据库
+	EmotionClassfy.dbConnect dbconnect;//连接数据库
 	myspliter ms;//定义分词包
 	ArrayList<String>StopWords;
 	ArrayList<String>PositiveDic;
@@ -27,7 +29,7 @@ public class BayesTrain {
 	}
 	public BayesTrain() throws Exception
 	{
-		dbconnect = new dbConnect();
+		dbconnect = new EmotionClassfy.dbConnect();
 		ms = new myspliter();
 		StopWords = new ArrayList<>();
 		PositiveDic = new ArrayList<>();

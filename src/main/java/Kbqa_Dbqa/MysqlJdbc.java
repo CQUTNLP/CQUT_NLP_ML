@@ -1,5 +1,6 @@
 package Kbqa_Dbqa;
 
+import java.io.*;
 import java.sql.*;
 
 /**
@@ -7,65 +8,116 @@ import java.sql.*;
  */
 public class MysqlJdbc {
 
-    // 驱动程序名
+    // 驱�?��?�?�??
     public String driver = "com.mysql.jdbc.Driver";
-    // URL指向要访问的数据库名test
+    // URL????�?访�?????��??�???test
     public  String url = "jdbc:mysql://127.0.0.1:3306/";
     public String database;
     private ResultSet rs=null;
-    public ResultSet SetMysqlJdbc(String database,String sql){
-        this.database=database;
-        url+=database;
+    private Statement statement=null;
+    private Connection conn=null;
+    MysqlJdbc(){
+    }
+    MysqlJdbc(String database){
+        init(database);
+    }
+    public void clearTable(String table ){
         try {
-            // 加载驱动程序
-            Class.forName(driver);
-            // 连续数据库
-            Connection conn = DriverManager.getConnection(url);
-            if(!conn.isClosed())
-                System.out.println("Succeeded connecting to the Database!");
-            // statement用来执行SQL语句
-            Statement statement = conn.createStatement();
-            // 要执行的SQL语句
-//            String sql = "select * from test";
-
-            // 结果集
-            this.rs = statement.executeQuery(sql);
-//            Integer documentid = null;
-//            String property=null;
-//            String value=null;
-//
-//            while(rs.next()) {
-//
-//                // 选择sname这列数据
-//                documentid = rs.getInt("documentid");
-//                property = rs.getString("property");
-//                value = rs.getString("value");
-//                // 首先使用ISO-8859-1字符集将name解码为字节序列并将结果存储新的字节数组中。
-//                // 然后使用GB2312字符集解码指定的字节数组
-////                name = new String(name.getBytes("ISO-8859-1"),"GB2312");
-//                // 输出结果
-////                System.out.println(rs.getString("sno") + "\t" + name);
-//                System.out.println("documentid:"+documentid);
-//                System.out.println("property:"+property);
-//                System.out.println("value:"+value);
-//            }
-
-//            rs.close();
-//            conn.close();
-
-        } catch(ClassNotFoundException e) {
-            System.out.println("Sorry,can`t find the Driver!");
-            e.printStackTrace();
-        } catch(SQLException e) {
-            e.printStackTrace();
-        } catch(Exception e) {
+            statement.executeUpdate("DELETE FROM "+table+";");
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return  rs;
+    }
+    public void  init(String database){
+        this.database=database;
+        url+=database;
+        // ??载驱?��?�?
+        try {
+            Class.forName(driver);
+            // �?�??��??�??
+            conn = DriverManager.getConnection(url);
+            if(!conn.isClosed())
+                System.out.println("Succeeded connecting to the Database!");
+            // statement?��?��?��?SQL�???
+            statement = conn.createStatement();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public Integer runSql(String sql){
+        int flag=1;
+        try
+        {
+//            sql= new String(sql.getBytes(),"GBK");
+            flag = statement.executeUpdate(sql);
+        } catch(Exception e) {
+            System.out.println("sql:"+sql);
+            e.printStackTrace();
+        }
+        return  flag;
     }
 
-    public static void main(String[] args){
-//        String
+    public static void main(String[] args) throws FileNotFoundException {
+        String database="test";
+        MysqlJdbc mysqlJdbc = new MysqlJdbc(database);
+        Integer num=1;
+        String fileName="/Users/tianjingwei/Documents/cqut/kbqa-dbqa/NLPCC2016QA/knowledge/nlpcc-iccpol-2016.kbqa.kb.mention2id";
+        String fileName2="/Users/tianjingwei/Documents/cqut/kbqa-dbqa/NLPCC2016QA/knowledge/output.txt";
+        File file=new File(fileName);
+        File fileWriter= new File (fileName2);
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    new FileInputStream(file), "utf-8"));
+//            BufferedWriter writer = new BufferedWriter(new FileWriter(fileWriter));
+            String line;
+            String sql=null;
+            int badLine=0;
+            Long startTime = System.currentTimeMillis();
+            mysqlJdbc.clearTable("kbqa_dbqa");
+            while((line=reader.readLine())!=null)
+            {
+//                line = new String(line.getBytes("utf-8"),"GBK");
+                line=line.replace("'","\"").replace("\\","");
+                String[] line2word=line.split("\\|\\|\\|");
+                if(line2word.length<=1||line2word[1].length()>5000){
+                    badLine++;
+//                    System.out.println("跳过句子"+line);
+                    continue;
+                }
+                try {
+
+                    sql="insert into kbqa_dbqa (col1,col2) values ('" +
+                            line2word[0].trim()+"','"+
+                            line2word[1].trim()+
+                            "');";
+                }catch (ArrayIndexOutOfBoundsException e){
+                    badLine++;
+                    System.out.println("错误的sql:"+sql);
+                }
+//                System.out.println(line);
+//                System.out.println(sql);
+                mysqlJdbc.runSql(sql);
+//                writer.write(sql);
+                if(num%100000==0){
+                    Long NowTime = System.currentTimeMillis();
+                    System.out.println("已插入"+num+"用时"+(NowTime-startTime)/1000.0+"秒");
+                }
+                num++;
+            }
+            Long endTime = System.currentTimeMillis();
+            System.out.println("已完成\n总用时" + (startTime - endTime) / 1000.0 + "秒");
+            System.out.println("成功插入" + num + "行");
+            System.out.println("BadLine" + badLine + "行");
+            reader.close();
+//            writer.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

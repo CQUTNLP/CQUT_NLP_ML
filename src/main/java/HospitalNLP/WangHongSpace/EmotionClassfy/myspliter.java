@@ -1,6 +1,7 @@
-package EmotionClassfy;
-import ICTCLAS.I3S.AC.ICTCLAS50;
+package HospitalNLP.WangHongSpace.EmotionClassfy;
 
+
+import HospitalNLP.WangHongSpace.AC.ICTCLAS50;
 
 public class myspliter {
 	

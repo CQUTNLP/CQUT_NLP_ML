@@ -1,5 +1,4 @@
-package ICTCLAS.I3S.AC;
-import java.io.*;
+package HospitalNLP.WangHongSpace.AC;
 public class ICTCLAS50
 {
 	//public enum eCodeType
