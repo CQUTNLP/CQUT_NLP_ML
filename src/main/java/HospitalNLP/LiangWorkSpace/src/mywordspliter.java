@@ -60,5 +60,10 @@ public class mywordspliter {
 
 	}
 
+	public static void main(String[] args) {
+		mywordspliter mws = new mywordspliter();
+		String str="今天是个好天气";
+		mws.split("str");
+	}
 
 }
