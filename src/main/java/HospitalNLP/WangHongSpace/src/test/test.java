@@ -37,7 +37,7 @@ public class test {
 				statement3 = dbconn.dbConn.createStatement();
 				ResultSet rs;
 				String sql1="select * from terms";
-				rs = statement1.executeQuery(sql1);  //´ÓÊı¾İ¿âÖĞ¶ÁÈ¡È«²¿µÄ±àÂë
+				rs = statement1.executeQuery(sql1);  //ä»æ•°æ®åº“ä¸­è¯»å–å…¨éƒ¨çš„ç¼–ç 
 				int pos=0;
 				while(rs.next()){
 					//System.out.println("c-----------"+c);
@@ -73,37 +73,37 @@ public class test {
 				String body_codes="";
 //				for(int i=2;i<7;i++)
 //				{
-					if(content.get(6).contains("×ªÒÆ"))
+					if(content.get(6).contains("è½¬ç§»"))
 					{
-						//String body_codes[] = content.get(i).split("×ªÒÆ ,£¬");
-						body_codes+=content.get(6).substring(content.get(6).indexOf("×ªÒÆ")-3, content.get(6).indexOf("×ªÒÆ")+3);
+						//String body_codes[] = content.get(i).split("è½¬ç§» ,ï¼Œ");
+						body_codes+=content.get(6).substring(content.get(6).indexOf("è½¬ç§»")-3, content.get(6).indexOf("è½¬ç§»")+3);
 						body_codes+=",";
 					}
 //				}
 				try{
-					String info = content.get(6).substring(content.get(6).indexOf("£¨")+1,content.get(6).indexOf("£©"));
+					String info = content.get(6).substring(content.get(6).indexOf("ï¼ˆ")+1,content.get(6).indexOf("ï¼‰"));
 					if(info.length()>4)
 					{
-						String[]infos = info.split("[£¬, ]");
+						String[]infos = info.split("[ï¼Œ, ]");
 						stage = infos[0];
 						type = infos[1];
 					}
 					else
 					{
-						stage = "ÁÙ´²Õï¶Ï";
-						type = "ÎŞ";
+						stage = "ä¸´åºŠè¯Šæ–­";
+						type = "æ— ";
 					}
 					String sql2;
-					sql2="insert into Result(NAME,CASE_ID,STAGE,TYPE,BODY_CODE,BODY_SIZE,CREATE_DATE) values('"+name+"','"+case_id+"','"+stage+"','"+type+"','"+body_codes+"','ÎŞ','"+createdate+"')";
+					sql2="insert into Result(NAME,CASE_ID,STAGE,TYPE,BODY_CODE,BODY_SIZE,CREATE_DATE) values('"+name+"','"+case_id+"','"+stage+"','"+type+"','"+body_codes+"','æ— ','"+createdate+"')";
 					statement3.executeUpdate(sql2);
 				}
 				catch(Exception e)
 				{
 					System.out.println(e);
-					stage="ÎŞ";
-					type="ÎŞ";
+					stage="æ— ";
+					type="æ— ";
 					String sql2;
-					sql2="insert into Result(NAME,CASE_ID,STAGE,TYPE,BODY_CODE,BODY_SIZE,CREATE_DATE) values('"+name+"','"+case_id+"','"+stage+"','"+type+"','"+body_codes+"','ÎŞ','"+createdate+"')";
+					sql2="insert into Result(NAME,CASE_ID,STAGE,TYPE,BODY_CODE,BODY_SIZE,CREATE_DATE) values('"+name+"','"+case_id+"','"+stage+"','"+type+"','"+body_codes+"','æ— ','"+createdate+"')";
 					statement2.executeUpdate(sql2);
 				}
 			} catch (SQLException e) {
@@ -131,10 +131,10 @@ public class test {
 		String path="src/text/";
 		File file=new File(path);
 		File[] tempList = file.listFiles();
-		System.out.println("¸ÃÄ¿Â¼ÏÂ¶ÔÏó¸öÊı£º"+tempList.length); 
+		System.out.println("è¯¥ç›®å½•ä¸‹å¯¹è±¡ä¸ªæ•°ï¼š"+tempList.length); 
 		for (int i = 0; i < tempList.length; i++) {
 			if (tempList[i].isFile()) {
-		        //System.out.println("ÎÄ     ¼ş£º"+tempList[i]);
+		        //System.out.println("æ–‡     ä»¶ï¼š"+tempList[i]);
 				String s=tempList[i].toString();
 				System.out.println(s);
 				fileLoder(s);
