@@ -1,5 +1,5 @@
 package HospitalNLP.LiangWorkSpace.src.ICTCLAS.I3S.AC;
-import java.io.*;
+
 public class ICTCLAS50
 {
 	//public enum eCodeType
@@ -24,6 +24,8 @@ public class ICTCLAS50
 	{
 		System.loadLibrary("ICTCLAS50");
 	}
+
+
 }
 
 

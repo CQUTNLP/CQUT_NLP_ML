@@ -1,5 +1,9 @@
 package HospitalNLP.TianWorkSpace;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,13 +13,83 @@ import java.util.regex.Pattern;
 public class MatchTest {
 
     public void ContainTest(){
-        String str="Hello World";  //å¾…åˆ¤æ–­çš„å­—ç¬¦ä¸²
+        String str="Hello World";  //å¾??¤æ????å­?ç¬?ä¸?
         String prexStr="ll";
-        String reg=".*ll.*";  //åˆ¤æ–­å­—ç¬¦ä¸²ä¸­æ˜¯å¦å«æœ‰ç‰¹å®šå­—ç¬¦ä¸²ll
+        String reg=".*ll.*";  //?¤æ??å­?ç¬?ä¸²ä¸­?????????¹å??å­?ç¬?ä¸?ll
         System.out.println(str.matches(reg));
         System.out.println(str.contains(prexStr));
     }
+    public void ttt(){
+        String Ps= ".*·Î.*°©.*";
+        String PPS= "ÇëÎÊ·ÎÔÚÄÄ¶ù";
+        Pattern p  =  Pattern.compile(Ps);
+        String s="1.×óÏÂ·ÎÁÛ°©£¨T4N2M0£¬¢óbÆÚ£©2¡¢¶à·¢Ç»Ï¶ĞÔÄÔ¹£Èû 3¡¢ÄÔÎ®Ëõ  ";
+        Matcher m = p.matcher(s);
+        System.out.println(s.replace("¡¢","."));
+//        if(m.find()){
+//        System.out.println(m.find());
 
+//        System.out.println(c);
+//        }
+//        String[] c=s.split("\\d\\.\\d?");
+//        System.out.println("11:"+PPS);
+//        for(String z:c){
+//            System.out.println(z);
+//        }
+
+    }
+    public void xxx(){
+        String Ps= ".*È·Õï.*(\\d{1,2})(ÔÂ|ÈÕ|Äê|ÖÜ).*(\\d{4}-\\d{2}-\\d{2}).*";
+        String Ps2= ".*(È·Õï|°ĞÏòÖÎÁÆ).*(\\d{1,2})(ÔÂ|ÈÕ|Äê|ÖÜ|Ìì).*(\\d{4}-\\d{2}-\\d{2}).*";
+        Pattern p  =  Pattern.compile(Ps2);
+        String s=" 2015-05-29£¬09:46          ³ö Ôº ¼Ç Â¼   »¼ÕßÌï¾®³¬£¬ÄĞ£¬53Ëê£¬×¨Òµ¼¼ÊõÈËÔ±£¬Òò¡°È·ÕïÓÒÏÂ·ÎÏÙ°©23ÔÂ¡±ÓÚ2015-05-27ÈëÔº¡£                                    ";
+        Matcher m = p.matcher(s);
+        Boolean b=m.find();
+        System.out.println(b);
+        if(b){
+            for (int i=0;i<=m.groupCount();i++){
+                System.out.println("group"+i+":"+m.group(i));
+            }
+        }
+    }
+    public void date(){
+        String str = "2013-07-18";
+        Integer date=9;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date myDate = formatter.parse(str);
+            Calendar c = Calendar.getInstance();
+            c.setTime(myDate);
+            c.add(Calendar.MONTH, -date);
+            myDate = c.getTime();
+            System.out.println(formatter.format(myDate));
+        } catch (ParseException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public void zzz(){
+        String Ps= ".*(\\d{4}-\\d{2}-\\d{2}).*";
+        Pattern p  =  Pattern.compile(Ps);
+        String str=" ÕïÁÆ¾­¹ı£ºÈëÔººóÍêÉÆÏà¹Ø¼ì²é£¬¸¨²éÊ¾£ºBĞÍÄÆÄòëÄ19.00pg/mL¡¢°×Ï¸°û6.41¡Á10^9/L¡¢ÖĞ" +
+                "ĞÔÁ£Ï¸°û°Ù·ÖÊı64.1%¡¢C-·´Ó¦µ°°×8.0mg/L¡¢½µ¸ÆËØÔ­0.05ng/ml¡¢°©Åß¿¹Ô­147.03ng/ml¡¢ÌÇ" +
+                "Àà¿¹Ô­242 395.60U/ml¡¢ÌÇÀà¿¹Ô­125 1422.67U/ml¡£ĞØ²¿CTÌáÊ¾£º1. ÓÒ·ÎÏÂÒ¶Ç°»ùµ×¶ÎÕ¼Î»" +
+                "ĞÔ²¡±ä£¬¿¼ÂÇÖÜÎ§ĞÍ·Î°©¿ÉÄÜĞÔ´ó£¬½¨ÒéÏËÖ§¾µ½øÒ»²½¼ì²é¡£2. ÓÒ·Î¼°×ó·ÎÉÏÒ¶Òì³£ÃÜ¶ÈÓ°£¬¿¼ÂÇ×ªÒÆ" +
+                "ĞÔÖ×Áö¡£3. ÓÒ·ÎÉ¢ÔÚÑ×Ö¢¡£4. ×İ¸ô¼°Ë«·ÎÃÅÁÜ°Í½áÖ×´ó¡£5. ĞÄ°üÉÙÁ¿»ıÒº¡£6. ĞØ6×µÌåÒì³£ÃÜ¶ÈÓ°" +
+                "£¬×ªÒÆĞÔÖ×Áö²»ÄÜ³ıÍâ¡£7. ÃÖÂşĞÔÖ¬·¾¸Î¡£ÏËÖ§¾µ¼ì²éÌáÊ¾Æø¹ÜÏÂ¶Î¶à·¢½á½Ú£¬ÓÚ×ó²àÖ§Æø¹ÜÈ¡»î¼ìÌáÊ¾" +
+                "Îª·ÎÏÙ°©£¬»¼ÕßÎŞÊÖÊõÖ¸Õ÷£¬·Î°©»ùÒò¼ì²éÌáÊ¾EGFR¡¢ALKÍ»±äÒõĞÔ¡£¾­Óë»¼Õß¼ÒÊô¹µÍ¨ºóÓÚ2015-11-29ÈÕ" +
+                "²ÉÓÃÅàÃÀÇúÈû+ÄÎ´ï²¬ĞĞÈ«Éí»¯ÁÆ£¬Í¬Ê±²ÉÓÃßòÀ´Á×ËáĞŞ¸´¹ÇÖÊ¡£»¯ÁÆºó¸´²éÑª³£¹æ¡¢¸ÎÉö¹¦Î´¼ûÃ÷ÏÔÒì³££¬¾­" +
+                "ÇëÊ¾ÉÏ¼¶Ò½ÉúÍ¬Òâºó£¬ÓèÒÔ°ìÀí³öÔº¡£                                 ";
+        String[] splitStr=str.split("ÌáÊ¾.*°©");
+        for (String s:splitStr){
+            Matcher m = p.matcher(s);
+            Boolean b=m.find();
+            if(b){
+                System.out.println(m.group(1));
+                break;
+            }
+        }
+    }
     public void Patterntest(){
 //        Pattern p1  =  Pattern.compile( "(.*)ll(.*)" );
         Pattern p2  =  Pattern.compile( "(.*)-(.*)-(.*)-(.*)" );
@@ -24,11 +98,11 @@ public class MatchTest {
         Matcher m  =  p2.matcher(s);
 //        while (m.find())
 //        {
-//            System.out.println( " m.group(): " + m.group());  // æ‰“å°æ‰€æœ‰
+//            System.out.println( " m.group(): " + m.group());  // ???°æ????
 //
-//            System.out.println( " m.group(1): " + m.group( 1 ));  // æ‰“å°æ•°å­—çš„
+//            System.out.println( " m.group(1): " + m.group( 1 ));  // ???°æ?°å????
 //
-//            System.out.println( " m.group(2): " + m.group( 2 ));  // æ‰“å°å­—æ¯çš„
+//            System.out.println( " m.group(2): " + m.group( 2 ));  // ???°å??æ¯???
 //            System.out.println();
 //
 //        }
@@ -41,6 +115,6 @@ public class MatchTest {
     }
     public static void main(String[] args) {
         MatchTest matchTest = new MatchTest();
-        matchTest.Patterntest();
+        matchTest.xxx();
     }
 }

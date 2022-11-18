@@ -1,6 +1,6 @@
 package HospitalNLP.LiangWorkSpace.src;
 
-import ICTCLAS.I3S.AC.ICTCLAS50;
+import HospitalNLP.LiangWorkSpace.src.ICTCLAS.I3S.AC.ICTCLAS50;
 
 //锟斤拷装锟街达拷锟斤拷
 public class mywordspliter {
@@ -60,5 +60,10 @@ public class mywordspliter {
 
 	}
 
+	public static void main(String[] args) {
+		mywordspliter mws = new mywordspliter();
+		String str="今天是个好天气";
+		mws.split("str");
+	}
 
 }
